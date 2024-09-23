@@ -5,7 +5,7 @@ go 1.23.1
 require github.com/gofiber/fiber/v2 v2.52.5 //direct
 
 require (
-	github.com/caarlos0/env v3.5.0+incompatible
+	github.com/caarlos0/env/v6 v6.10.1
 	github.com/joho/godotenv v1.5.1
 	gorm.io/driver/postgres v1.5.9
 	gorm.io/gorm v1.25.12

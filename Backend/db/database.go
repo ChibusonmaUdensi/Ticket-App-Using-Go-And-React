@@ -11,7 +11,7 @@ import (
 )
 func Init(config *config.EnvConfig, DBMigrator func(db *gorm.DB) error) *gorm.DB{
 	uri := fmt.Sprintf(`
-	    host=%s user=%s dbname=%s password=%s sslmode=%s port=5432`,
+	    host=%s user=%s dbname=%s password=%s sslmode=%s port=5433`,
 		config.DBHost, config.DBUser, config.DBName, config.DBPassword, config.DBSSLMode,
 	)
 	db, err := gorm.Open(postgres.Open(uri), &gorm.Config{

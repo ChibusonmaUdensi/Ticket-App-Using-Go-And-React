@@ -2,13 +2,14 @@ version: "3.9"
 
 services:
   app:
-    tty: true #keep the container running
+    tty: true # keep the container running
     restart: always
     image: ticket-booking
     container_name: ticket-booking
     build:
+      context: .
     ports:
-    - "3000:3000"
+      - "3000:3000"
     env_file:
       - .env
     networks:
@@ -17,24 +18,21 @@ services:
       db:
         condition: service_healthy
     volumes:
-    - .:/src/app
+      - .:/src/app
     command: air -c .air.toml
 
-
-  
   db:
     image: postgres:alpine
     container_name: ticket-booking-db
     environment:
-      POSTGRES_HOST=${DB_HOST}
+      POSTGRES_HOST: ${DB_HOST}
       POSTGRES_DB: ${DB_NAME}
       POSTGRES_USER: ${DB_USER}
-      POSTGRES_PASSWORD: ${DB_PASSWORD} 
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
     ports:
-    - 5432:5432
+      - "5433:5433"
     networks:
-    - application
-    healthcheck:
+      - application
     volumes:
       - postgres-db:/var/lib/postgresql/data
     restart: always
