@@ -19,6 +19,7 @@ func main() {
 	AppName: "TicketBooking",
 	ServerHeader: "Fiber",
 	})
+	
 
 	eventRepository := repositories.NewEventRepository(db)
 
