@@ -6,13 +6,14 @@ import (
 )
 
 type Event struct {
-	ID 			string `json:"id" gorm:"primarykey"`
+	ID 			uint `json:"id" gorm:"primarykey"`
 	Name 		string `json:"name"`
 	Location    string `json:"location"`
 	Date 		time.Time `json:"date"`
 	CreatedAt	time.Time `json:"createdAt"`
 	UpdatedAt   time.Time `json:"updatedAt"`
 }
+
 
 type EventRepository interface {
 	GetMany (ctx context.Context) ([]*Event, error)
