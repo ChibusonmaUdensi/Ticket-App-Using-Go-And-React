@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-
+	"github.com/ChibusonmaUdensi/Ticket-App-Using-Go-And-React/middlewares"
 	"github.com/ChibusonmaUdensi/Ticket-App-Using-Go-And-React/config"
 	"github.com/ChibusonmaUdensi/Ticket-App-Using-Go-And-React/db"
 	"github.com/ChibusonmaUdensi/Ticket-App-Using-Go-And-React/services"
@@ -32,10 +32,10 @@ func main() {
 	server := app.Group("/api")
 	handlers.NewAuthHandler(server.Group("/auth"), authService)
 
-	privateRoutes := server.Use(middleware.AuthProtected(db))
+	privateRoutes := server.Use(middlewares.AuthProtected(db))
 
-	handlers.NewEventHandler(server.Group("/event"), eventRepository)
-	handlers.NewTicketHandler(server.Group("/ticket"), ticketRepository)
+	handlers.NewEventHandler(privateRoutes.Group("/event"), eventRepository)
+	handlers.NewTicketHandler(privateRoutes.Group("/ticket"), ticketRepository)
 
     app.Listen(fmt.Sprintf(":" + envConfig.ServerPort))
 }
